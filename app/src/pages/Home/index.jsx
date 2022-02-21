@@ -5,7 +5,7 @@ import Filters from "../../components/Filters";
 import CountryCard from "../../components/CountryCard";
 import { useEffect, useState } from "react";
 import { urlBase } from "../../service/api";
-import { Link } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Main = styled.main`
   width: 100%;
@@ -45,7 +45,7 @@ const Home = () => {
   }, []);
 
   const getCardsInfo = async () => {
-    await fetch(`${urlBase}/all`)
+    await fetch(`${urlBase}/all?fields=flags,name,population,region,capital,`)
       .then((response) => response.json())
       .then((info) => setCardInfo(info));
   };
@@ -62,11 +62,12 @@ const Home = () => {
               return (
                 <Link
                   key={id}
-                  to={`/${info.name.common
-                    .replaceAll(" ", "-")
-                    .replaceAll("(", "")
-                    .replaceAll(")", "")
-                    .toLowerCase()}`}
+                  to="/details"
+                  // to={`/${info.name.common
+                  //   .replaceAll(" ", "-")
+                  //   .replaceAll("(", "")
+                  //   .replaceAll(")", "")
+                  //   .toLowerCase()}`}
                 >
                   <CountryCard info={info} />
                 </Link>
