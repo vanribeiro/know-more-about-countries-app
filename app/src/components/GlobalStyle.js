@@ -14,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
     body{
         background-color: ${lightMode.backgroundColor};
     }
+
 `;
 
 export default GlobalStyle;
