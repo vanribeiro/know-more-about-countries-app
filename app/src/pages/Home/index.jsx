@@ -6,6 +6,7 @@ import CountryCard from "../../components/CountryCard";
 import { useEffect, useState } from "react";
 import { urlBase } from "../../service/api";
 import { Link } from "react-router-dom";
+import { Error, Loader } from "../../components/MessageStatus";
 
 const Main = styled.main`
   width: 100%;
@@ -39,6 +40,9 @@ const CountryCardsSection = styled.section`
 
 const Home = () => {
   const [cardInfo, setCardInfo] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [error, setError] = useState(null);
+  // const [region, setRegion] = useState("");
 
   useEffect(() => {
     getCardsInfo();
@@ -47,37 +51,66 @@ const Home = () => {
   const getCardsInfo = async () => {
     await fetch(`${urlBase}/all?fields=flags,name,population,region,capital,`)
       .then((response) => response.json())
-      .then((info) => setCardInfo(info));
+      .then(
+        (info) => {
+          setCardInfo(info);
+          setIsLoaded(true);
+        },
+        (error) => {
+          setIsLoaded(true);
+          setError(error);
+        }
+      );
   };
+  
+  if(error){
+    return (
+      <>
+        <Header />
+        <Main>
+          <Container>
+            <Error />
+          </Container>
+        </Main>
+      </>
+    );
+  } else if(!isLoaded){
+    return (
+      <>
+        <Header />
+        <Main>
+          <Container>
+            <Loader />
+          </Container>
+        </Main>
+      </>
+    );
+  } else{
 
-  return (
-    <>
-      <Header />
-      <Main>
-        <Container>
-          <Filters />
-          <CountryCardsSection>
-            {cardInfo.map((info, id) => {
-            //   console.log();
-              return (
-                <Link
-                  key={id}
-                  to="/details"
-                  // to={`/${info.name.common
-                  //   .replaceAll(" ", "-")
-                  //   .replaceAll("(", "")
-                  //   .replaceAll(")", "")
-                  //   .toLowerCase()}`}
-                >
-                  <CountryCard info={info} />
-                </Link>
-              );
-            })}
-          </CountryCardsSection>
-        </Container>
-      </Main>
-    </>
-  );
+    return (
+      <>
+        <Header />
+        <Main>
+          <Container>
+            <Filters />
+            <CountryCardsSection>
+              {cardInfo.map((info, id) => {
+                    return (
+                      <Link
+                        key={id}
+                        to={`/${info.name.official.toLowerCase()}`}
+                      >
+                        <CountryCard info={info} />
+                      </Link>
+                    );
+              })}
+            </CountryCardsSection>
+          </Container>
+        </Main>
+      </>
+    );
+  }
+
 };
 
 export default Home;

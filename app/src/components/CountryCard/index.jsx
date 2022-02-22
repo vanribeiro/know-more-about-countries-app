@@ -3,6 +3,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import styled from 'styled-components';
 import { Strong, P } from '../UI';
+import { lightMode } from '../UI/variables';
 
 const Cardsx = {
     maxWidth: '100%', 
@@ -16,6 +17,7 @@ const CardContentsx = {
 const TitleCard = styled.h2`
     font-size: 16px;
     margin-bottom: 10px;
+    color: ${ lightMode.textColor };
 `;
 
 const CountryCard = ({info}) => {
