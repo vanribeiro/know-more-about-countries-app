@@ -14,10 +14,10 @@ const MessageContainer = styled(Message)`
     flex-direction: column;
 `;
 
-const PageNotFound = () =>{
+const PageNotFound = ({toggleTheme}) =>{
     return (
         <>
-        <Header />
+        <Header toggleTheme={toggleTheme}/>
         <Main>
           <Container>
             <BackButton />

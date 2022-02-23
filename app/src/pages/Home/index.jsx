@@ -39,15 +39,18 @@ const CountryCardsSection = styled.section`
   }
 `;
 
-const Home = () => {
+const Home = ({toggleTheme}) => {
   const [cardInfo, setCardInfo] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
   const search = useContext(SearchContext);
 
   useEffect(() => {
-    const getCardsInfo = async () => {
-      await fetch(`${urlBase}/all?fields=flags,name,population,region,capital,cca3`)
+    const controller = new AbortController();
+
+    const getCardsInfo = () => {
+      const url = `${urlBase}/all?fields=flags,name,population,region,capital,cca3`
+      fetch(url, { signal: controller.signal })
         .then((response) => response.json())
         .then(
           (info) => {
@@ -64,11 +67,12 @@ const Home = () => {
     getCardsInfo();
 
   }, []);
+
   
   if(error){
     return (
       <>
-        <Header />
+        <Header toggleTheme={toggleTheme}/>
         <Main>
           <Container>
             <Error error={error} />
@@ -79,7 +83,7 @@ const Home = () => {
   } else if(!isLoaded){
     return (
       <>
-        <Header />
+        <Header toggleTheme={toggleTheme}/>
         <Main>
           <Container>
             <Loader />
@@ -88,24 +92,23 @@ const Home = () => {
       </>
     );
   } else{
-
     return (
       <>
-        <Header />
+        <Header toggleTheme={toggleTheme}/>
         <Main>
           <p>{search}</p>
           <Container>
             <Filters />
             <CountryCardsSection>
               {cardInfo.map((info, id) => {
-                    return (
-                      <Link
-                        key={id}
-                        to={`/${info.name.common}`}
-                      >
-                        <CountryCard info={info} />
-                      </Link>
-                    );
+                  return (
+                    <Link
+                      key={id}
+                      to={`/${info.name.common}`}
+                    >
+                      <CountryCard info={info} />
+                    </Link>
+                  );
               })}
             </CountryCardsSection>
           </Container>

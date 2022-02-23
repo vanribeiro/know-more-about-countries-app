@@ -47,6 +47,12 @@ const FooterSection = styled.div`
   display: flex;
   align-items: center;
   margin-top: 30px;
+
+  @media screen and (max-width: 992px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
 `;
 
 const BorderCountriesContainer = styled.div`
@@ -60,20 +66,21 @@ const BorderCountriesText = styled(P)`
   white-space: nowrap;
   width: 160px;
   font-weight: 600;
-  color: ${lightMode.textColor};
+  color: ${({theme}) => theme.text};
 `;
 
 const Text = styled(P)`
   line-height: 1.8;
 `;
 
-const CountryDetails = ({ countryInfo }) => {
+const CountryDetails = ({ countryInfo}) => {
   const [countryBorderNames, setCountryBorderNames] = useState([]);
 
   useEffect(() => {
+    const countriesBorderAcronomys = countryInfo[0].borders;
+    const controller = new AbortController();
+    
     const fetchAcronomys = async () => {
-      const countriesBorderAcronomys = countryInfo[0].borders;
-
       if (countriesBorderAcronomys !== undefined) {
         const url = `${urlBase}/alpha?codes=${
           countriesBorderAcronomys !== undefined
@@ -81,22 +88,21 @@ const CountryDetails = ({ countryInfo }) => {
             : countriesBorderAcronomys
         }`;
 
-        await fetch(url)
+        await fetch(url, { signal: controller.signal })
           .then((response) => response.json())
           .then(
-            (info) => {
-              setCountryBorderNames(info);
-            },
-            (error) => {
-              console.log(`Message: ${error.message}`);
-              console.log(`Status: ${error.status}`);
+            (info) => {setCountryBorderNames(info);},
+            (error) => {console.log(`Message: ${error.message}`);
             }
-          );
+          );         
       }
     };
 
     fetchAcronomys();
+
   }, [countryInfo]);
+  
+  const handleClick = () => window.scrollTo(0,0);
 
   return (
     <FlexContainer>
@@ -214,7 +220,11 @@ const CountryDetails = ({ countryInfo }) => {
                   {countryBorderNames.map((border, index) => {
                     return (
                       <Link key={index} to={`/${border.name.common}`}>
-                        <Button>{border.name.common}</Button>
+                        <Button
+                          onClick={handleClick}
+                        >
+                          {border.name.common}
+                        </Button>
                       </Link>
                     );
                   })}

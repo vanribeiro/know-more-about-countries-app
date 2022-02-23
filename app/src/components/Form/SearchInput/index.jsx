@@ -8,7 +8,7 @@ import SearchContext from "../../../contexts/SearchContext";
 const useStyles = makeStyles({
     inputSearch: {
         backgroundColor: 'white',
-        boxShadow: '1px 1px 5px #e2e2e2',
+        boxShadow: `1px 1px 5px #e2e2e2`,
         width: '100%',
         borderRadius: '4px',
     },

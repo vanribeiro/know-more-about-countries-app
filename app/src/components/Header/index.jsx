@@ -1,20 +1,20 @@
 import styled from 'styled-components';
-import { lightMode } from '../UI/variables';
 import { faMoon } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SwitcherTheme from '../SwitcherTheme';
 import Container from '../Container';
+import { Link } from 'react-router-dom';
 
 const HeaderElement = styled.header`
     display: flex;
     align-items: center;
-    box-shadow: 1px 1px 8px ${lightMode.boxShadowColor};
-    background-color: ${lightMode.backgroundColor};
+    box-shadow: 1px 1px 8px ${({theme}) => theme.boxShadowColor};
+    background-color: ${({theme}) => theme.boxShadowColor};
     height: 80px;
 `;
 
 const Title = styled.h1`
-    color: ${lightMode.textColor};
+    color: ${({theme}) => theme.text};
     font-size: 1.142857142857143rem;
 `;
 
@@ -24,14 +24,16 @@ const FlexContainer = styled.div`
     align-items: center;
 `;
 
-const Header = () => {
+const Header = ({toggleTheme}) => {
     return (
         <HeaderElement>
             <Container>
                 <FlexContainer>
-                    <Title>Where in the world?</Title>
+                    <Link to="/">
+                        <Title>Where in the world?</Title>
+                    </Link>
                     <div>
-                        <SwitcherTheme>
+                        <SwitcherTheme onClick={toggleTheme}>
                             <FontAwesomeIcon icon={faMoon} />
                             Dark Mode 
                         </SwitcherTheme>

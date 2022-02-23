@@ -1,17 +1,20 @@
 const urlBase = `https://restcountries.com/v3.1`;
 
-// const populateDictionary = async () => {
-//     const countryDictionary = [];
-//     await fetch(`${urlBase}/all?fields=cca3,name`)
-//       .then((response) => response.json())
-//       .then((info) => {
-//         });
-//     return countryDictionary;
-//   };
+const countryDictionary = {};
 
-//   populateDictionary()
-  
+const populateDictionary = async () => {
+    await fetch(`${urlBase}/all?fields=cca3,name`)
+        .then((response) => response.json())
+        .then((info) => {
+            info.forEach(element => {
+                countryDictionary[element.cca3] = element.name.official;
+            })
+        });
+}
+
+populateDictionary();  
 
 export {
-    urlBase
+    urlBase,
+    countryDictionary
 }

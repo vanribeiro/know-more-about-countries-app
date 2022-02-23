@@ -8,72 +8,48 @@ import BackButton from "./../../components/BackButton";
 import { Loader, Error } from "./../../components/MessageStatus";
 import { useParams } from "react-router-dom";
 
-const Details = () => {
+const Details = ({toggleTheme}) => {
   const [countryInfo, setCountryInfo] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   let { id } = useParams();
   
   useEffect(() => {
-    const fetchAPI = async () => {
-      const url = `${urlBase}/name/${id}`;
-      await fetch(url)
+    const url = `${urlBase}/name/${id}?fullText=true`;
+    const controller = new AbortController();
+    
+    
+    const timer = setTimeout(async ()=> {
+       await fetch(url, { signal: controller.signal })
         .then((response) => response.json())
         .then(
-          (info) => {
-            setCountryInfo(info);
-            setIsLoaded(true);
-          },
-          (error) => {
-            setIsLoaded(true);
-            setError(error);
-          }
+          (info) => setCountryInfo(info),
+          (error) => setError(error)
         );
-    };
-
-    fetchAPI();
+      
+      setIsLoading(false);
+    }, 1000);
   
+    return () => clearTimeout(timer);
   }, [id, countryInfo]);
 
-
-
-  if (error) {
-    return (
-      <>
-        <Header />
-        <Main>
-          <Container>
-            <Error error={error}/>
-          </Container>
-        </Main>
-      </>
-    );
-  } else if (!isLoaded) {
-    return (
-      <>
-        <Header />
-        <Main>
-          <Container>
-            <Loader />
-          </Container>
-        </Main>
-      </>
-    );
-  } else if (isLoaded) {
-    return (
-      <>
-        <Header />
-        <Main>
-          <Container>
-            <BackButton />
-            <CountryDetails countryInfo={countryInfo} />
-          </Container>
-        </Main>
-      </>
-    );
-  }
-
-  // return(<></>)
+  return (
+    <>
+      <Header toggleTheme={toggleTheme} />
+      <Main>
+        <Container>
+          {error && <Error error={error}/>}
+          {isLoading && <Loader />}
+          {!isLoading && 
+            <>
+              <BackButton />
+              <CountryDetails countryInfo={countryInfo} />
+            </>
+          }
+        </Container>
+      </Main>
+    </>
+  );
 };
 
 export default Details;

@@ -21,6 +21,7 @@ const TitleCard = styled.h2`
 `;
 
 const CountryCard = ({info}) => {
+
     return(
         <>
             <Card sx={Cardsx}>

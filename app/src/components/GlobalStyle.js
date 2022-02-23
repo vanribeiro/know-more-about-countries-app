@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-import { lightMode } from "./UI/variables";
 
 const GlobalStyle = createGlobalStyle`
     *{
@@ -11,8 +10,12 @@ const GlobalStyle = createGlobalStyle`
         text-decoration: none;
     }
 
+    html{
+        scroll-behavior: smooth;
+    }
+
     body{
-        background-color: ${lightMode.backgroundColor};
+        background-color: ${({theme})=> theme.backgroundColor};
     }
 
 `;

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import {lightMode} from './variables';
 
 const Main = styled.main`
   width: 100%;
@@ -7,18 +6,18 @@ const Main = styled.main`
 
 const H2 = styled.h2`
   font-size: 24px;
-  color: ${ lightMode.textColor };
+  color: ${({theme}) => theme.text};
   `;
 
 const Strong = styled.strong`
   font-weight: 600;
-  color: ${ lightMode.textColor };
+  color: ${({theme}) => theme.text};
   `;
 
 const P = styled.p`
   letter-spacing: 0.3px;
   line-height: 1.5;
-  color: ${ lightMode.textColor };
+  color: ${({theme}) => theme.text};
 `;
 
 const Img = styled.img`
@@ -27,7 +26,7 @@ const Img = styled.img`
   `;
 
 const Button = styled.button`
-    color: ${ lightMode.textColor };
+    color: ${({theme}) => theme.text};
     padding: 8px 16px;
     background-color: transparent;
     border: 1px solid transparent;

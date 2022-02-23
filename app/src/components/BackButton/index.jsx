@@ -13,18 +13,27 @@ const TopButton = styled(Button)`
   justify-content: space-around;
   align-items: center;
   width: 100px;
+  color: ${({theme}) => theme.text};
+  box-shadow: 1px 1px 5px ${({theme}) => theme.boxShadowButtonColor};
+
+  .arrow-left-icon{
+    fill: ${({theme}) => theme.text};
+  }
 `;
 
 const BackButton = () => {
   let navigate = useNavigate();
 
-  const handleClick = () => navigate(-1);
+  const handleClick = () => {
+    navigate(-1)
+    window.scrollTo(0, 0); 
+  };
   
     return (
         <>
           <ButtonContainer>
             <TopButton onClick={handleClick}>
-                <ArrowLeft style={{width: '18px'}}/>Back
+                <ArrowLeft className="arrow-left-icon" style={{width: '18px'}}/>Back
             </TopButton>
           </ButtonContainer>
         </>
