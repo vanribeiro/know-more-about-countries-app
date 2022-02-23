@@ -3,10 +3,11 @@ import Header from "../../components/Header";
 import Container from "../../components/Container";
 import Filters from "../../components/Filters";
 import CountryCard from "../../components/CountryCard";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { urlBase } from "../../service/api";
 import { Link } from "react-router-dom";
 import { Error, Loader } from "../../components/MessageStatus";
+import SearchContext from "../../contexts/SearchContext";
 
 const Main = styled.main`
   width: 100%;
@@ -42,26 +43,27 @@ const Home = () => {
   const [cardInfo, setCardInfo] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
-  // const [region, setRegion] = useState("");
+  const search = useContext(SearchContext);
 
   useEffect(() => {
-    getCardsInfo();
-  }, []);
+    const getCardsInfo = async () => {
+      await fetch(`${urlBase}/all?fields=flags,name,population,region,capital,cca3`)
+        .then((response) => response.json())
+        .then(
+          (info) => {
+            setCardInfo(info);
+            setIsLoaded(true);
+          },
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        );
+    };
 
-  const getCardsInfo = async () => {
-    await fetch(`${urlBase}/all?fields=flags,name,population,region,capital,`)
-      .then((response) => response.json())
-      .then(
-        (info) => {
-          setCardInfo(info);
-          setIsLoaded(true);
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      );
-  };
+    getCardsInfo();
+
+  }, []);
   
   if(error){
     return (
@@ -69,7 +71,7 @@ const Home = () => {
         <Header />
         <Main>
           <Container>
-            <Error />
+            <Error error={error} />
           </Container>
         </Main>
       </>
@@ -91,6 +93,7 @@ const Home = () => {
       <>
         <Header />
         <Main>
+          <p>{search}</p>
           <Container>
             <Filters />
             <CountryCardsSection>
@@ -98,7 +101,7 @@ const Home = () => {
                     return (
                       <Link
                         key={id}
-                        to={`/${info.name.official.toLowerCase()}`}
+                        to={`/${info.name.common}`}
                       >
                         <CountryCard info={info} />
                       </Link>

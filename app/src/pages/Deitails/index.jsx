@@ -31,9 +31,9 @@ const Details = () => {
         );
     };
 
-    fetchAPI(); 
+    fetchAPI();
   
-  }, [id]);
+  }, [id, countryInfo]);
 
 
 
@@ -43,7 +43,7 @@ const Details = () => {
         <Header />
         <Main>
           <Container>
-            <Error />
+            <Error error={error}/>
           </Container>
         </Main>
       </>
@@ -72,6 +72,8 @@ const Details = () => {
       </>
     );
   }
+
+  // return(<></>)
 };
 
 export default Details;

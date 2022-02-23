@@ -28,7 +28,7 @@ const CountryCard = ({info}) => {
                     component="img"
                     alt={`${info.name.common} Flag`}
                     height="180"
-                    image={`${info.flags.png}`}
+                    image={`${info.flags.svg}`}
                 />
                 <CardContent sx={CardContentsx}>
                     <TitleCard>{info.name.common}</TitleCard>
@@ -42,7 +42,11 @@ const CountryCard = ({info}) => {
                     </P>
                     <P>
                         <Strong>Capital: </Strong>
-                        {info.capital}
+                        {
+                            info.capital.length === 0 || info.capital === undefined
+                            ? "Not Specified" 
+                            : info.capital
+                        }
                     </P>
                     
                 </CardContent>

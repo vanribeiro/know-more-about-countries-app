@@ -18,7 +18,7 @@ const TopButton = styled(Button)`
 const BackButton = () => {
   let navigate = useNavigate();
 
-  const handleClick = () => navigate('/');
+  const handleClick = () => navigate(-1);
   
     return (
         <>
