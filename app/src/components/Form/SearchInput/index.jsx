@@ -1,28 +1,30 @@
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { InputAdornment, TextField } from "@mui/material";
-import { makeStyles } from '@material-ui/styles';
-import { useState } from "react";
+import styled from 'styled-components';
 import SearchContext from "../../../contexts/SearchContext";
 
-const useStyles = makeStyles({
-    inputSearch: {
-        backgroundColor: 'white',
-        boxShadow: `1px 1px 5px #e2e2e2`,
-        width: '100%',
-        borderRadius: '4px',
-    },
-    fieldset: {
-        border: 'transparent !important',
-    },
-    inputAdornment: {
-        padding: '0 8px'
-    },
-});
+
+const InputTypeSearch = styled(TextField)`
+    background-color: ${({theme}) => theme.inputBackgroundColor};
+    width: 100%;
+    border-radius: 4px; 
+    
+    fieldset{
+        border: transparent !important;
+        box-shadow: 1px 1px 5px ${({theme}) => theme.inputBoxShadowColor}; 
+    }
+
+    ::placeholder,
+    .search-icon,
+    input {
+        color: ${({theme}) => theme.text};
+    }
+`;
 
 const SearchInput = () => {
     const [search, setSearch] = useState("");
-    const classes = useStyles();
 
     const handleChange = (event) => {
         setSearch(event.target.value);
@@ -31,11 +33,10 @@ const SearchInput = () => {
     return (
         <>
         <SearchContext.Provider value={search}>
-            <TextField
+            <InputTypeSearch
                 onChange={handleChange}
                 type="search"
                 value={search}
-                className={classes.inputSearch}
                 id="search-country"
                 placeholder="Search for a country..."
                 inputProps={{ 'aria-label': 'Without label' }}
@@ -43,13 +44,11 @@ const SearchInput = () => {
                 InputProps={{
                     startAdornment: (
                         <InputAdornment
-                        className={classes.inputAdornment}
-                        position="start"
+                            position="start"
                         >
-                            <FontAwesomeIcon icon={faSearch} />
+                            <FontAwesomeIcon className="search-icon" icon={faSearch} />
                         </InputAdornment>
                     ),
-                    classes:{notchedOutline: classes.fieldset}
                 }}
                 />
             </SearchContext.Provider>

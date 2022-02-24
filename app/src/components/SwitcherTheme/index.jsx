@@ -8,7 +8,11 @@ const SwitcherTheme = styled.button`
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
-    color: ${({theme}) => theme.textColor};
+    color: ${({theme}) => theme.text};
+
+    .theme-moon-icon{
+        color: ${({theme}) => theme.text};
+    }
 `;
 
 export default SwitcherTheme;

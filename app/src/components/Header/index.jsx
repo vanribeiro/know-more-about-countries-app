@@ -9,7 +9,7 @@ const HeaderElement = styled.header`
     display: flex;
     align-items: center;
     box-shadow: 1px 1px 8px ${({theme}) => theme.boxShadowColor};
-    background-color: ${({theme}) => theme.boxShadowColor};
+    background-color: ${({theme}) => theme.headerBackground};
     height: 80px;
 `;
 
@@ -34,7 +34,7 @@ const Header = ({toggleTheme}) => {
                     </Link>
                     <div>
                         <SwitcherTheme onClick={toggleTheme}>
-                            <FontAwesomeIcon icon={faMoon} />
+                            <FontAwesomeIcon className="theme-moon-icon" icon={faMoon} />
                             Dark Mode 
                         </SwitcherTheme>
                     </div>

@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { P, Strong, Img, H2, Button } from "../UI";
 import { Link } from "react-router-dom";
-import { lightMode } from "../UI/variables";
 import { useEffect, useState } from "react";
 import { urlBase } from "../../service/api";
 
 const FlexContainer = styled.div`
   width: 100%;
   margin-top: 50px;
+  padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,20 +27,24 @@ const Figure = styled.figure`
   width: 50%;
 
   @media screen and (max-width: 992px) {
-    width: 80%;
+    width: 100%;
   }
 `;
 
 const CountryInfoSection = styled.section`
   width: 50%;
   @media screen and (max-width: 992px) {
-    width: 80%;
+    width: 100%;
   }
 `;
 
 const Content = styled.div`
   display: grid;
   grid-template-columns: 50% 50%;
+
+  @media screen and (max-width: 992px) {
+    grid-template-columns: 100%;
+  }
 `;
 
 const FooterSection = styled.div`

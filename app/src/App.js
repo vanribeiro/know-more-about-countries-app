@@ -10,10 +10,7 @@ import { ThemeProvider } from "styled-components";
 function App() {
   const [ theme, setTheme ] = useState(true);
 
-  const toggleTheme = () => {
-    theme ? setTheme(false) : setTheme(true);
-    console.log(theme)
-  };
+  const toggleTheme = () => theme ? setTheme(false) : setTheme(true);
 
   return (
     <>

@@ -6,6 +6,9 @@ import { useNavigate } from 'react-router-dom';
 const ButtonContainer = styled.div`
   width: 100%;
   margin-top: 40px;
+  @media screen and (max-width: 992px) {
+    padding: 0 10px;
+  }
 `;
 
 const TopButton = styled(Button)`
@@ -15,6 +18,7 @@ const TopButton = styled(Button)`
   width: 100px;
   color: ${({theme}) => theme.text};
   box-shadow: 1px 1px 5px ${({theme}) => theme.boxShadowButtonColor};
+  background-color: ${({theme}) => theme.buttonBackgroundColor};
 
   .arrow-left-icon{
     fill: ${({theme}) => theme.text};
