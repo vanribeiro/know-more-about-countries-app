@@ -1,49 +1,20 @@
 import styled from "styled-components";
 import Header from "../../components/Header";
 import Container from "../../components/Container";
-import Filters from "../../components/Filters";
-import CountryCard from "../../components/CountryCard";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { urlBase } from "../../service/api";
-import { Link } from "react-router-dom";
 import { Error, Loader } from "../../components/MessageStatus";
-import SearchContext from "../../contexts/SearchContext";
+import CardList from "../../components/CardList";
 
 const Main = styled.main`
   width: 100%;
   margin-bottom: 30px;
 `;
 
-const CountryCardsSection = styled.section`
-  width: 100%;
-  margin-top: 50px;
-  display: grid;
-  row-gap: 50px;
-  justify-content: space-between;
-
-  @media screen and (max-width: 539px) {
-    grid-template-columns: repeat(1, auto);
-    justify-content: center;
-  }
-
-  @media screen and (min-width: 540px) {
-    grid-template-columns: repeat(2, 48%);
-  }
-
-  @media screen and (min-width: 768px) {
-    grid-template-columns: repeat(3, 30%);
-  }
-
-  @media screen and (min-width: 1200px) {
-    grid-template-columns: repeat(4, 22%);
-  }
-`;
-
 const Home = ({toggleTheme}) => {
-  const [cardInfo, setCardInfo] = useState([]);
+  const [cardsInfo, setCardInfo] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
-  const search = useContext(SearchContext);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -68,7 +39,6 @@ const Home = ({toggleTheme}) => {
 
   }, []);
 
-  
   if(error){
     return (
       <>
@@ -96,21 +66,8 @@ const Home = ({toggleTheme}) => {
       <>
         <Header toggleTheme={toggleTheme}/>
         <Main>
-          <p>{search}</p>
           <Container>
-            <Filters />
-            <CountryCardsSection>
-              {cardInfo.map((info, id) => {
-                  return (
-                    <Link
-                      key={id}
-                      to={`/${info.name.common}`}
-                    >
-                      <CountryCard info={info} />
-                    </Link>
-                  );
-              })}
-            </CountryCardsSection>
+              <CardList cardsInfo={cardsInfo}/>
           </Container>
         </Main>
       </>

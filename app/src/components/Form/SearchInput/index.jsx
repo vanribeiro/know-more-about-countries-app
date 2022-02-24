@@ -3,8 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { InputAdornment, TextField } from "@mui/material";
 import styled from 'styled-components';
-import SearchContext from "../../../contexts/SearchContext";
 
+const Form = styled.form`
+    width: 100%;
+`;
 
 const InputTypeSearch = styled(TextField)`
     background-color: ${({theme}) => theme.inputBackgroundColor};
@@ -23,35 +25,44 @@ const InputTypeSearch = styled(TextField)`
     }
 `;
 
-const SearchInput = () => {
-    const [search, setSearch] = useState("");
+const SearchInput = ({onSubmit}) => {
+    const [search, setSearch] = useState('');
 
     const handleChange = (event) => {
         setSearch(event.target.value);
     }
 
+    const handleSearchSubmit = (event) => {
+        event.preventDefault();
+        onSubmit(search);
+        setSearch('');
+    }
+
     return (
         <>
-        <SearchContext.Provider value={search}>
-            <InputTypeSearch
-                onChange={handleChange}
-                type="search"
-                value={search}
-                id="search-country"
-                placeholder="Search for a country..."
-                inputProps={{ 'aria-label': 'Without label' }}
-                variant="outlined"
-                InputProps={{
-                    startAdornment: (
-                        <InputAdornment
-                            position="start"
-                        >
-                            <FontAwesomeIcon className="search-icon" icon={faSearch} />
-                        </InputAdornment>
-                    ),
-                }}
+            <Form onSubmit={handleSearchSubmit}>
+                <InputTypeSearch
+                    onChange={handleChange}
+                    type="search"
+                    value={search}
+                    id="search-country"
+                    placeholder="Search for a country..."
+                    inputProps={{ 'aria-label': 'Without label' }}
+                    variant="outlined"
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment
+                                position="start"
+                            >
+                                <FontAwesomeIcon 
+                                    className="search-icon" 
+                                    icon={faSearch} 
+                                />
+                            </InputAdornment>
+                        ),
+                    }}
                 />
-            </SearchContext.Provider>
+            </Form>
         </>
     )
 }

@@ -6,16 +6,14 @@ const FlexContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     margin-top: 50px;
+    width: 100%;
+
 
     @media screen and (max-width:767px){
-        width: 100%;
         flex-direction: column;
         gap: 10px;
     }
 
-    @media screen and (min-width:768px){
-        width: 100%;
-    }
 `;
 
 const BoxInput = styled.div`
@@ -27,23 +25,29 @@ const BoxInput = styled.div`
 `;
 
 const BoxSelect = styled.div`
-    width: 30%;
+    width: 48%;
 
     @media screen and (max-width: 767px){
         width: 100%;
     }
+
+    @media screen and (min-width: 768px){
+        display: flex;
+        justify-content: flex-end;
+    }
 `;
 
-const Filters = () => {  
+const Filters = ({onSearchSubmit}) => {
+
     return (
         <>
             <FlexContainer>
                 <BoxInput>
-                    <SearchInput />
+                    <SearchInput onSubmit={onSearchSubmit}/>
                 </BoxInput>
-                <BoxSelect>
-                    <SelectInput />
-                </BoxSelect>
+                    <BoxSelect>
+                        <SelectInput />
+                    </BoxSelect>
             </FlexContainer>
         </>
     );
