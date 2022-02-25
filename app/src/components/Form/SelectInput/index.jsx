@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 
 const Select = styled.div`
-  margin-top: 30px;
   width: 240px;
   font-family: "Nunito Sans", sans-serif;
   font-weight: 600;
@@ -16,6 +15,11 @@ const Select = styled.div`
   box-shadow: 1px 1px 5px ${({theme}) => theme.inputBoxShadowColor};
   padding: 18px 24px;
   cursor: pointer;
+
+  @media screen and (max-width:767px){
+    margin-top: 30px;
+  }
+
 
   .select-header__text{
     display: inline-flex;
@@ -63,26 +67,31 @@ const Item = styled.li`
   }
 `;
 
-const SelectInput = () => {
+const SelectInput = ({setSelectValue}) => {
+  const [selectTitle, setSelectTitle] = useState('Find By Region: ');
   const [region, setRegion] = useState('');
   const [isOpen, setIsOpen] = useState(true);
 
+  const toggleSelectList = () => isOpen ? setIsOpen(false) : setIsOpen(true);
+
   const handleItemClick = (event) => {
     setRegion(event.target.dataset.valueRegion);
+    setSelectValue(event.target.dataset.valueRegion);
+    setSelectTitle(event.target.dataset.valueRegion);
+    toggleSelectList();
   };
-
-  const handleSelectClick = () => {
-    isOpen ? setIsOpen(false) : setIsOpen(true);
-  };
+  
+  const handleSelectClick = () => toggleSelectList();
 
   return(
       <>
         <Select
             id="select-filter"
             onClick={handleSelectClick}
+            selectValue={region}
         >
           <span className="select-header__text">
-            Find By Region: {region}
+            {selectTitle}
             <FontAwesomeIcon 
               className="angle-icon" 
               icon={isOpen ? faAngleDown : faAngleUp} 
@@ -91,7 +100,7 @@ const SelectInput = () => {
         </Select>
           <List style={isOpen ? {display: 'none'} : {display: 'block'}}>
             <Item onClick={handleItemClick} data-value-region="Africa">Africa</Item>
-            <Item onClick={handleItemClick} data-value-region="Americas">America</Item>
+            <Item onClick={handleItemClick} data-value-region="Americas">Americas</Item>
             <Item onClick={handleItemClick} data-value-region="Asia">Asia</Item>
             <Item onClick={handleItemClick} data-value-region="Europe">Europe</Item>
             <Item onClick={handleItemClick} data-value-region="Oceania">Oceania</Item>

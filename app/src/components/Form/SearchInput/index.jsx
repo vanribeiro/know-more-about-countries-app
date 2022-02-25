@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faClose, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { InputAdornment, TextField } from "@mui/material";
 import styled from 'styled-components';
 
@@ -25,17 +25,24 @@ const InputTypeSearch = styled(TextField)`
     }
 `;
 
-const SearchInput = ({onSubmit}) => {
+const SearchInput = ({onSubmit, setClearInput}) => {
     const [search, setSearch] = useState('');
 
     const handleChange = (event) => {
         setSearch(event.target.value);
     }
-
+    
     const handleSearchSubmit = (event) => {
         event.preventDefault();
         onSubmit(search);
-        setSearch('');
+        setClearInput(false);
+    }
+
+    const handleClickOnClearButton = () => {
+        if(search !== ''){
+            setSearch('');
+            setClearInput(true);
+        }
     }
 
     return (
@@ -53,10 +60,12 @@ const SearchInput = ({onSubmit}) => {
                         startAdornment: (
                             <InputAdornment
                                 position="start"
+                                onClick={handleClickOnClearButton}
+                                sx={{cursor: 'pointer'}}
                             >
                                 <FontAwesomeIcon 
                                     className="search-icon" 
-                                    icon={faSearch} 
+                                    icon={search === '' ? faSearch : faClose} 
                                 />
                             </InputAdornment>
                         ),

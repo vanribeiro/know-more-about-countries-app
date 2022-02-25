@@ -37,16 +37,22 @@ const BoxSelect = styled.div`
     }
 `;
 
-const Filters = ({onSearchSubmit}) => {
+const Filters = ({onSearchSubmit, setClearInput, clearInput, setSelectValue, selectValue}) => {
 
     return (
         <>
             <FlexContainer>
                 <BoxInput>
-                    <SearchInput onSubmit={onSearchSubmit}/>
+                    <SearchInput 
+                        setClearInput={setClearInput} 
+                        onSubmit={onSearchSubmit}
+                        clearInput={clearInput}
+                    />
                 </BoxInput>
                     <BoxSelect>
-                        <SelectInput />
+                        <SelectInput 
+                            setSelectValue={setSelectValue}
+                        />
                     </BoxSelect>
             </FlexContainer>
         </>

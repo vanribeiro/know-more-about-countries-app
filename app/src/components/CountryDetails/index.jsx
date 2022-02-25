@@ -13,7 +13,7 @@ const FlexContainer = styled.div`
   align-items: center;
   gap: 50px;
 
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 767px) {
     flex-direction: column;
     margin-bottom: 50px;
   }

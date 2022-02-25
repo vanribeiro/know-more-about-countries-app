@@ -31,6 +31,8 @@ const CountryCardsSection = styled.section`
 
 const CardList = ({cardsInfo}) => {
   const [nameSearched, setNameSearched] = useState('');
+  const [clearInput, setClearInput] = useState(false);
+  const [selectValue, setSelectValue] = useState('');
 
   const onSearchSubmit = (text) => {
     if(text !== ''){
@@ -38,47 +40,52 @@ const CardList = ({cardsInfo}) => {
     } 
   }
 
-  if(nameSearched !== ''){
-    return (
-        <>
-          <Filters onSearchSubmit={onSearchSubmit}/>
-          <CountryCardsSection>
-                {cardsInfo
-                    .filter(info => info.name.common === nameSearched)
-                    .map((info, id) => {
-                      return (
-                        <Link
-                          key={id}
-                          to={`/${info.name.common}`}
-                        >
-                          <CountryCard info={info} />
-                        </Link>
-                      );
-                  })
-                }
-          </CountryCardsSection>
-        </>
-      );
-  } else if(nameSearched === ''){
-      return (
-        <>
-          <Filters onSearchSubmit={onSearchSubmit}/>
-          <CountryCardsSection>
-                {cardsInfo.map((info, id) => {
-                      return (
-                        <Link
-                          key={id}
-                          to={`/${info.name.common}`}
-                        >
-                          <CountryCard info={info} />
-                        </Link>
-                      );
-                  })
-                }
-          </CountryCardsSection>
-        </>
-      );
+  const searchCountry = (cardsInfo) => {
+
+    return cardsInfo.filter(cardInfo => {
+      if(cardInfo.region === selectValue){
+        return cardsInfo;
+      } else if(cardInfo.name.common.includes(nameSearched)){
+          return cardInfo.name.common.includes(nameSearched);
+        }else{
+
+          if(clearInput){
+            return cardsInfo
+          }
+        }
+        return '';
+      }
+
+
+     );
   }
+
+
+  return (
+    <>
+      <Filters 
+        onSearchSubmit={onSearchSubmit}
+        setClearInput={setClearInput}
+        clearInput={clearInput}
+        setSelectValue={setSelectValue}
+        selectValue={selectValue}
+      />
+      <CountryCardsSection>
+            {searchCountry(cardsInfo)
+              .map((info, id) => {
+                  return (
+                    <Link
+                      key={id}
+                      to={`/${info.name.common}`}
+                    >
+                      <CountryCard info={info} />
+                    </Link>
+                  );
+              })
+            }
+      </CountryCardsSection>
+    </>
+  );
 
   
 
