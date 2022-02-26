@@ -30,58 +30,58 @@ const CountryCardsSection = styled.section`
   }
 `;
 
-const CardList = ({cardsInfo}) => {
-  const [nameSearched, setNameSearched] = useState('');
+const CardList = ({ cardsInfo }) => {
+  const [nameSearched, setNameSearched] = useState("");
   const [clearInput, setClearInput] = useState(false);
-  const [selectValue, setSelectValue] = useState('');
+  const [selectValue, setSelectValue] = useState("");
 
   const onSearchSubmit = (text) => {
-    if(text !== ''){
+    if (text !== "") {
       setNameSearched(text);
-    } 
-  }
-  
-  const countrySearch = (cardsInfo) =>{
-    return cardsInfo.filter(cardInfo => {
-      if(cardInfo.name.common.includes(nameSearched)){
+    }
+  };
+
+  const countrySearch = (cardsInfo) => {
+    return cardsInfo.filter((cardInfo) => {
+      if (cardInfo.name.common.includes(nameSearched)) {
         return cardInfo.name.common.includes(nameSearched);
-      } else if(clearInput){
+      } else if (clearInput) {
         return cardsInfo;
       }
-      return '';
+      return "";
     });
-  }
-
+  };
 
   return (
-    <> 
-      <Filters 
+    <>
+      <Filters
         onSearchSubmit={onSearchSubmit}
         setClearInput={setClearInput}
         clearInput={clearInput}
         setSelectValue={setSelectValue}
         selectValue={selectValue}
       />
-        <>
-          {countrySearch(cardsInfo).length === 0 ? <NotFoundCountry /> : ''}
-          <CountryCardsSection>
-            {countrySearch(cardsInfo)
-              .map((info, id) => {
-                  return (
-                    <Link key={id} to={`/country/${info.name.common.replaceAll(" ", '%20').replaceAll('(', "%28").replaceAll(')', "%29").toLowerCase()}`}>
-                      <CountryCard info={info} />
-                    </Link>
-                  );
-              })
-            }
-          </CountryCardsSection>
-
-        </>
+      <>
+        {countrySearch(cardsInfo).length === 0 ? <NotFoundCountry /> : ""}
+        <CountryCardsSection>
+          {countrySearch(cardsInfo).map((info, id) => {
+            return (
+              <Link
+                key={id}
+                to={`/country/${info.name.common
+                  .replaceAll(" ", "%20")
+                  .replaceAll("(", "%28")
+                  .replaceAll(")", "%29")
+                  .toLowerCase()}`}
+              >
+                <CountryCard info={info} />
+              </Link>
+            );
+          })}
+        </CountryCardsSection>
+      </>
     </>
   );
-
-  
-
 };
 
 export default CardList;
