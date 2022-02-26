@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 const Select = styled.div`
   width: 240px;
@@ -82,7 +83,7 @@ const SelectInput = ({setSelectValue}) => {
   };
   
   const handleSelectClick = () => toggleSelectList();
-
+  const regions = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
   return(
       <>
         <Select
@@ -98,12 +99,27 @@ const SelectInput = ({setSelectValue}) => {
             />
           </span>
         </Select>
+
           <List style={isOpen ? {display: 'none'} : {display: 'block'}}>
-            <Item onClick={handleItemClick} data-value-region="Africa">Africa</Item>
-            <Item onClick={handleItemClick} data-value-region="Americas">Americas</Item>
-            <Item onClick={handleItemClick} data-value-region="Asia">Asia</Item>
-            <Item onClick={handleItemClick} data-value-region="Europe">Europe</Item>
-            <Item onClick={handleItemClick} data-value-region="Oceania">Oceania</Item>
+            {
+              regions.map((region, id) => {
+                return (
+                  <Link key={id} to={`/region/${region}`}>
+                    <Item 
+                      onClick={handleItemClick} 
+                      data-value-region={`${region}`}
+                    >
+                        {region}
+                    </Item>
+                  </Link> 
+                )
+              })
+              }
+              <Link to="/">
+              <Item onClick={handleItemClick} data-value-region="Home">
+                  All Countries
+              </Item>
+            </Link> 
           </List>
       </>
   );

@@ -17,20 +17,24 @@ const Details = ({toggleTheme}) => {
   useEffect(() => {
     const url = `${urlBase}/name/${id}?fullText=true`;
     const controller = new AbortController();
-    
-    
+    let isActive = true;
+        
     const timer = setTimeout(async ()=> {
        await fetch(url, { signal: controller.signal })
         .then((response) => response.json())
         .then(
-          (info) => setCountryInfo(info),
+          (info) => { if(isActive) setCountryInfo(info) },
           (error) => setError(error)
         );
       
       setIsLoading(false);
     }, 1000);
   
-    return () => clearTimeout(timer);
+    return () => {
+      isActive = false;
+      controller.abort();
+      clearTimeout(timer);
+    };
   }, [id, countryInfo]);
 
   return (

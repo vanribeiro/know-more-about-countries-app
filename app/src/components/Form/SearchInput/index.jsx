@@ -31,6 +31,12 @@ const SearchInput = ({onSubmit, setClearInput}) => {
     const handleChange = (event) => {
         setSearch(event.target.value);
     }
+
+    const handleKeyUp = (event) => {
+        if(event.key === 'Enter'){
+            event.target.blur();
+        }
+    }
     
     const handleSearchSubmit = (event) => {
         event.preventDefault();
@@ -50,7 +56,8 @@ const SearchInput = ({onSubmit, setClearInput}) => {
             <Form onSubmit={handleSearchSubmit}>
                 <InputTypeSearch
                     onChange={handleChange}
-                    type="search"
+                    onKeyUp={handleKeyUp}
+                    type="text"
                     value={search}
                     id="search-country"
                     placeholder="Search for a country..."

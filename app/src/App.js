@@ -6,6 +6,8 @@ import PageNotFound from "./pages/PageNotFound";
 import { lightModeTheme, darkModeTheme } from "./components/UI/themes";
 import { useState } from "react";
 import { ThemeProvider } from "styled-components";
+import LoaderAnimation from "./pages/LoaderAnimation";
+import Region from "./pages/Region";
 
 function App() {
   const [theme, setTheme] = useState(true);
@@ -23,7 +25,12 @@ function App() {
               exact
               element={<Home toggleTheme={toggleTheme} />}
             />
-            <Route path=":id" element={<Details toggleTheme={toggleTheme} />} />
+            <Route path="country/:id" element={<Details toggleTheme={toggleTheme} />} />
+            <Route path="region/:id" element={<Region toggleTheme={toggleTheme} />} />
+            <Route
+              path="/loader-animation"
+              element={<LoaderAnimation toggleTheme={toggleTheme} />}
+            />
             <Route
               path="*"
               element={<PageNotFound toggleTheme={toggleTheme} />}

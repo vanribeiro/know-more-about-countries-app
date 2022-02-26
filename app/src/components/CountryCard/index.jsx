@@ -48,8 +48,9 @@ const CountryCard = ({info}) => {
                     </P>
                     <P>
                         <Strong>Capital: </Strong>
+                        {/* {console.log(info.name.common + " obj is: " + Array.isArray(info.capital))} */}
                         {
-                            info.capital.length === 0 || info.capital === undefined
+                            info.capital === undefined || info.capital.length === 0
                             ? "Not Specified" 
                             : info.capital
                         }

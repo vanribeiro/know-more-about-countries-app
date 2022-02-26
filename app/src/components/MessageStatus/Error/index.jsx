@@ -1,9 +1,22 @@
+import styled from "styled-components";
 import { Message } from "../../UI";
+
+const ErrorMessage = styled(Message)`
+    color: ${({theme}) => theme.errorMessageColor};
+    
+    strong, p{
+        font-size: 1.125em;
+    }
+`;
 
 const Error = ({error}) =>{
     return (
         <>
-            <Message>Error: {error.message}</Message>
+            <ErrorMessage>
+                <p>
+                    <strong>Error:</strong> Error: {error.message}
+                </p>
+            </ErrorMessage>
         </>
     )
 }

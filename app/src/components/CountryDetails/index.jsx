@@ -83,6 +83,7 @@ const CountryDetails = ({ countryInfo}) => {
   useEffect(() => {
     const countriesBorderAcronomys = countryInfo[0].borders;
     const controller = new AbortController();
+    let isActive = true;
     
     const fetchAcronomys = async () => {
       if (countriesBorderAcronomys !== undefined) {
@@ -95,15 +96,19 @@ const CountryDetails = ({ countryInfo}) => {
         await fetch(url, { signal: controller.signal })
           .then((response) => response.json())
           .then(
-            (info) => {setCountryBorderNames(info);},
+            (info) => {if(isActive) setCountryBorderNames(info);},
             (error) => {console.log(`Message: ${error.message}`);
             }
           );         
       }
     };
-
     fetchAcronomys();
 
+    document.title = countryInfo[0].name.common;
+    return () => {
+      isActive = false;
+      controller.abort();
+    }
   }, [countryInfo]);
   
   const handleClick = () => window.scrollTo(0,0);
@@ -223,7 +228,7 @@ const CountryDetails = ({ countryInfo}) => {
                 <BorderCountriesContainer>
                   {countryBorderNames.map((border, index) => {
                     return (
-                      <Link key={index} to={`/${border.name.common}`}>
+                      <Link key={index} to={`/country/${border.name.common}`}>
                         <Button
                           onClick={handleClick}
                         >

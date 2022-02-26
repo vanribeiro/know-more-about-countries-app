@@ -3,6 +3,7 @@ import Filters from "../../components/Filters";
 import CountryCard from "../../components/CountryCard";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import NotFoundCountry from "../MessageStatus/NotFoundCountry";
 
 const CountryCardsSection = styled.section`
   width: 100%;
@@ -39,30 +40,21 @@ const CardList = ({cardsInfo}) => {
       setNameSearched(text);
     } 
   }
-
-  const searchCountry = (cardsInfo) => {
-
+  
+  const countrySearch = (cardsInfo) =>{
     return cardsInfo.filter(cardInfo => {
-      if(cardInfo.region === selectValue){
+      if(cardInfo.name.common.includes(nameSearched)){
+        return cardInfo.name.common.includes(nameSearched);
+      } else if(clearInput){
         return cardsInfo;
-      } else if(cardInfo.name.common.includes(nameSearched)){
-          return cardInfo.name.common.includes(nameSearched);
-        }else{
-
-          if(clearInput){
-            return cardsInfo
-          }
-        }
-        return '';
       }
-
-
-     );
+      return '';
+    });
   }
 
 
   return (
-    <>
+    <> 
       <Filters 
         onSearchSubmit={onSearchSubmit}
         setClearInput={setClearInput}
@@ -70,20 +62,21 @@ const CardList = ({cardsInfo}) => {
         setSelectValue={setSelectValue}
         selectValue={selectValue}
       />
-      <CountryCardsSection>
-            {searchCountry(cardsInfo)
+        <>
+          {countrySearch(cardsInfo).length === 0 ? <NotFoundCountry /> : ''}
+          <CountryCardsSection>
+            {countrySearch(cardsInfo)
               .map((info, id) => {
                   return (
-                    <Link
-                      key={id}
-                      to={`/${info.name.common}`}
-                    >
+                    <Link key={id} to={`/country/${info.name.common}`}>
                       <CountryCard info={info} />
                     </Link>
                   );
               })
             }
-      </CountryCardsSection>
+          </CountryCardsSection>
+
+        </>
     </>
   );
 
