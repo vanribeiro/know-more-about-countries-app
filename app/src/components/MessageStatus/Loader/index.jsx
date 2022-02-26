@@ -30,7 +30,7 @@ const bounce = keyframes`
     }
 `;
 
-const AnimationArea = styled.main`
+const AnimationArea = styled.div`
     width: 50%;
     display: flex;
     justify-content: space-between;
@@ -59,8 +59,6 @@ const AnimationArea = styled.main`
     .globe-icon--03{
         animation: ${bounce} 1s 0.1s linear infinite;
     }
-
-
 `;
 
 const Loader = () =>{
