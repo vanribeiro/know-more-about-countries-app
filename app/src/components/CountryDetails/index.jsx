@@ -112,7 +112,7 @@ const CountryDetails = ({ countryInfo}) => {
   }, [countryInfo]);
   
   const handleClick = () => window.scrollTo(0,0);
-
+  // console.log(countryInfo[0].name.common.replaceAll(" ", '%20').replaceAll('(', "").replaceAll(')', "").toLowerCase())
   return (
     <FlexContainer>
       <Figure>

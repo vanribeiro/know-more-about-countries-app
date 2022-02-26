@@ -68,7 +68,7 @@ const CardList = ({cardsInfo}) => {
             {countrySearch(cardsInfo)
               .map((info, id) => {
                   return (
-                    <Link key={id} to={`/country/${info.name.common}`}>
+                    <Link key={id} to={`/country/${info.name.common.replaceAll(" ", '%20').replaceAll('(', "%28").replaceAll(')', "%29").toLowerCase()}`}>
                       <CountryCard info={info} />
                     </Link>
                   );

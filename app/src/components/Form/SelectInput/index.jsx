@@ -104,7 +104,7 @@ const SelectInput = ({setSelectValue}) => {
             {
               regions.map((region, id) => {
                 return (
-                  <Link key={id} to={`/region/${region}`}>
+                  <Link key={id} to={`/region/${region.toLowerCase()}`}>
                     <Item 
                       onClick={handleItemClick} 
                       data-value-region={`${region}`}
