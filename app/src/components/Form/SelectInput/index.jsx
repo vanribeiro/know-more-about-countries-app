@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
@@ -21,6 +21,9 @@ const Select = styled.div`
     margin-top: 30px;
   }
 
+  span{
+    text-transform: capitalize;
+  }
 
   .select-header__text{
     display: inline-flex;
@@ -68,21 +71,33 @@ const Item = styled.li`
   }
 `;
 
-const SelectInput = ({setSelectValue}) => {
-  const [selectTitle, setSelectTitle] = useState('Find By Region: ');
+const SelectInput = () => {
+  const [selectTitle, setSelectTitle] = useState('');
   const [region, setRegion] = useState('');
   const [isOpen, setIsOpen] = useState(true);
 
+  useEffect(() => {
+
+    const pathname = window.location.pathname;
+    if(pathname.length === 1){
+      setSelectTitle('Find By Region: ');
+    } else if(pathname.search('region')){
+      setSelectTitle(pathname.split('/')[2])
+    }
+
+  }, [setSelectTitle]);
+
   const toggleSelectList = () => isOpen ? setIsOpen(false) : setIsOpen(true);
 
+  const handleSelectClick = () => toggleSelectList();
+
   const handleItemClick = (event) => {
-    setRegion(event.target.dataset.valueRegion);
-    setSelectValue(event.target.dataset.valueRegion);
-    setSelectTitle(event.target.dataset.valueRegion);
+    const value = event.target.dataset.valueRegion;
+    setRegion(value);
+    setSelectTitle(value);
     toggleSelectList();
   };
-  
-  const handleSelectClick = () => toggleSelectList();
+
   const regions = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
   return(
       <>

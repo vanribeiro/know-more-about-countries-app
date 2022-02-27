@@ -3,8 +3,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import styled from 'styled-components';
 import { Strong, P } from '../UI';
-// import { styled as muiStyled } from '@mui/system';
-
 
 const CardContainer = styled(Card)`
     max-width: 100%;
@@ -12,9 +10,36 @@ const CardContainer = styled(Card)`
     background-color: ${({theme}) => theme.cardBackgroundColor};
 `;
 
-const CardContentContainer = styled(CardContent)`
-    background-color: ${({theme}) => theme.cardContentBackgroundColor};
-    padding: '28px 24px';
+const CardImage = styled(CardMedia)`
+
+    @media screen and (max-width: 640px){
+        height: 180px;
+    }
+
+    @media screen and (min-width: 641px){
+        height: 160px;
+    }
+
+    @media screen and (min-width: 768px){
+        height: 120px;
+    }
+
+    @media screen and (min-width: 892px){
+        height: 150px;
+    }
+
+    @media screen and (min-width: 992px){
+        height: 144px;
+    }
+
+    @media screen and (min-width: 1200px){
+        height: 150px;
+    }
+
+    @media screen and (min-width: 1400px){
+        height: 165px;
+    }
+
 `;
 
 const TitleCard = styled.h2`
@@ -23,17 +48,19 @@ const TitleCard = styled.h2`
     color: ${({theme}) => theme.text};
 `;
 
-
+const CardContentContainer = styled(CardContent)`
+    background-color: ${({theme}) => theme.cardContentBackgroundColor};
+    padding: 24px 24px 36px !important;
+`;
 
 const CountryCard = ({info}) => {
 
     return(
         <>
             <CardContainer sx={{backgroundColor: "transparent"}}>
-                <CardMedia 
+                <CardImage 
                     component="img"
                     alt={`${info.name.common} Flag`}
-                    height="180"
                     image={`${info.flags.svg}`}
                 />
                 <CardContentContainer>

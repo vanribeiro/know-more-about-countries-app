@@ -4,15 +4,19 @@ import { faClose, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { InputAdornment, TextField } from "@mui/material";
 import styled from 'styled-components';
 
-const Form = styled.form`
-    width: 100%;
-`;
-
 const InputTypeSearch = styled(TextField)`
     background-color: ${({theme}) => theme.inputBackgroundColor};
-    width: 100%;
     border-radius: 4px; 
-    
+    width: 100%;
+
+    @media screen and (min-width:1200px){
+        width: 90%;
+    }
+
+    @media screen and (min-width:1200px){
+        width: 70%;
+    }
+
     fieldset{
         border: transparent !important;
         box-shadow: 1px 1px 5px ${({theme}) => theme.inputBoxShadowColor}; 
@@ -25,23 +29,20 @@ const InputTypeSearch = styled(TextField)`
     }
 `;
 
-const SearchInput = ({onSubmit, setClearInput}) => {
+const SearchInput = ({onSearchSubmit, setClearInput}) => {
     const [search, setSearch] = useState('');
 
     const handleChange = (event) => {
-        setSearch(event.target.value);
-    }
-
-    const handleKeyUp = (event) => {
-        if(event.key === 'Enter'){
-            event.target.blur();
+        let value = event.target.value;
+        if(value === ''){
+            setSearch('');
+            onSearchSubmit('');
+            setClearInput(true);
+        } else {
+            setSearch(value);
+            onSearchSubmit(search);
+            setClearInput(false);
         }
-    }
-    
-    const handleSearchSubmit = (event) => {
-        event.preventDefault();
-        onSubmit(search);
-        setClearInput(false);
     }
 
     const handleClickOnClearButton = () => {
@@ -53,32 +54,29 @@ const SearchInput = ({onSubmit, setClearInput}) => {
 
     return (
         <>
-            <Form onSubmit={handleSearchSubmit}>
-                <InputTypeSearch
-                    onChange={handleChange}
-                    onKeyUp={handleKeyUp}
-                    type="text"
-                    value={search}
-                    id="search-country"
-                    placeholder="Search for a country..."
-                    inputProps={{ 'aria-label': 'Without label' }}
-                    variant="outlined"
-                    InputProps={{
-                        startAdornment: (
-                            <InputAdornment
-                                position="start"
-                                onClick={handleClickOnClearButton}
-                                sx={{cursor: 'pointer'}}
-                            >
-                                <FontAwesomeIcon 
-                                    className="search-icon" 
-                                    icon={search === '' ? faSearch : faClose} 
-                                />
-                            </InputAdornment>
-                        ),
-                    }}
-                />
-            </Form>
+            <InputTypeSearch
+                onChange={handleChange}
+                type="text"
+                value={search}
+                id="search-country"
+                placeholder="Search for a country..."
+                inputProps={{ 'aria-label': 'Without label' }}
+                variant="outlined"
+                InputProps={{
+                    startAdornment: (
+                        <InputAdornment
+                            position="start"
+                            onClick={handleClickOnClearButton}
+                            sx={{cursor: 'pointer'}}
+                        >
+                            <FontAwesomeIcon 
+                                className="search-icon" 
+                                icon={search === '' ? faSearch : faClose} 
+                            />
+                        </InputAdornment>
+                    ),
+                }}
+            />
         </>
     )
 }

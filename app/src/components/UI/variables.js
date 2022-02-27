@@ -9,7 +9,7 @@ const lightMode = {
     cardBackgroundColor: 'transparent',
     cardContentBackgroundColor: 'hsl(0, 0%, 100%)',
     inputBackgroundColor: 'hsl(0, 0%, 100%)',
-    inputBoxShadowColor: 'hsl(0, 0%, 52%)',
+    inputBoxShadowColor: 'hsl(0, 0%, 91.4%)',
     errorMessageColor: 'red'
 }
 

@@ -2,61 +2,60 @@ import styled from "styled-components";
 import { SearchInput, SelectInput } from "./../Form";
 
 const FlexContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 50px;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 50px;
+  width: 100%;
 
-
-    @media screen and (max-width:767px){
-        flex-direction: column;
-        gap: 10px;
-    }
-
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+    gap: 10px;
+  }
 `;
 
 const BoxInput = styled.div`
-    width: 50%;
+  width: 50%;
 
-    @media screen and (max-width:767px){
-        width: 100%;
-    }
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
 `;
 
 const BoxSelect = styled.div`
-    width: 48%;
+  width: 48%;
 
-    @media screen and (max-width: 767px){
-        width: 100%;
-    }
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
 
-    @media screen and (min-width: 768px){
-        display: flex;
-        justify-content: flex-end;
-    }
+  @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: flex-end;
+  }
 `;
 
-const Filters = ({onSearchSubmit, setClearInput, clearInput, setSelectValue, selectValue}) => {
-
-    return (
-        <>
-            <FlexContainer>
-                <BoxInput>
-                    <SearchInput 
-                        setClearInput={setClearInput} 
-                        onSubmit={onSearchSubmit}
-                        clearInput={clearInput}
-                    />
-                </BoxInput>
-                    <BoxSelect>
-                        <SelectInput 
-                            setSelectValue={setSelectValue}
-                        />
-                    </BoxSelect>
-            </FlexContainer>
-        </>
-    );
+const Filters = ({
+onSearchSubmit,
+  setClearInput,
+  clearInput
+}) => {
+  return (
+    <>
+      <FlexContainer>
+        <BoxInput>
+          <SearchInput
+            setClearInput={setClearInput}
+            onSearchSubmit={onSearchSubmit}
+            clearInput={clearInput}
+          />
+        </BoxInput>
+        <BoxSelect>
+          <SelectInput />
+        </BoxSelect>
+      </FlexContainer>
+    </>
+  );
 };
 
 export default Filters;

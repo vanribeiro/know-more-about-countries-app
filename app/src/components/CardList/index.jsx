@@ -28,17 +28,24 @@ const CountryCardsSection = styled.section`
   @media screen and (min-width: 1200px) {
     grid-template-columns: repeat(4, 22%);
   }
+
+  @media screen and (min-width: 1300px) {
+    grid-template-columns: repeat(4, 21%);
+  }
+
+  @media screen and (min-width: 1400px) {
+    grid-template-columns: repeat(4, 20%);
+  }
 `;
 
 const CardList = ({ cardsInfo }) => {
   const [nameSearched, setNameSearched] = useState("");
   const [clearInput, setClearInput] = useState(false);
-  const [selectValue, setSelectValue] = useState("");
 
   const onSearchSubmit = (text) => {
     if (text !== "") {
       setNameSearched(text);
-    }
+    } 
   };
 
   const countrySearch = (cardsInfo) => {
@@ -58,8 +65,6 @@ const CardList = ({ cardsInfo }) => {
         onSearchSubmit={onSearchSubmit}
         setClearInput={setClearInput}
         clearInput={clearInput}
-        setSelectValue={setSelectValue}
-        selectValue={selectValue}
       />
       <>
         {countrySearch(cardsInfo).length === 0 ? <NotFoundCountry /> : ""}
@@ -69,9 +74,9 @@ const CardList = ({ cardsInfo }) => {
               <Link
                 key={id}
                 to={`/country/${info.name.common
-                  .replaceAll(" ", "%20")
-                  .replaceAll("(", "%28")
-                  .replaceAll(")", "%29")
+                  .replaceAll(/\s/ig, "%20")
+                  .replaceAll(/\(/ig, "%28")
+                  .replaceAll(/\)/ig, "%29")
                   .toLowerCase()}`}
               >
                 <CountryCard info={info} />

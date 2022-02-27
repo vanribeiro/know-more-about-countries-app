@@ -14,7 +14,7 @@ const Error = ({error}) =>{
         <>
             <ErrorMessage>
                 <p>
-                    <strong>Error:</strong> Error: {error.message}
+                    <strong>Error:</strong> {error.message}
                 </p>
             </ErrorMessage>
         </>

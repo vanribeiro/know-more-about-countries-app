@@ -4,43 +4,30 @@ import Container from "../../components/Container";
 import { useEffect, useState } from "react";
 import { Error, Loader } from "../../components/MessageStatus";
 import CardList from "../../components/CardList";
+import { fetchListCountries } from "../../service/api";
 
 const Main = styled.main`
   width: 100%;
   margin-bottom: 30px;
 `;
 
-const Common = ({toggleTheme, id, url, titlePage}) => {
+const Common = ({toggleTheme, url, titlePage}) => {
   const [info, setInfo] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+
     const controller = new AbortController();
-    let isActive = true;
-
-    const getRegionInfo = async () => {
-      await fetch(url, { signal: controller.signal })
-        .then((response) => response.json())
-        .then(
-          (info) => {
-            if(isActive) setInfo(info);
-            setIsLoaded(true);
-          },
-          (error) => {
-            setIsLoaded(true);
-            setError(error);
-          }
-        );
-    };
-
-    getRegionInfo();
+    fetchListCountries(url, setError, setInfo, setIsLoaded);
     document.title = titlePage;
     
     return () => {
-      isActive = false
+      controller.abort();
+      setTimeout(() => controller.abort(), 5000);
     };
-  }, [id, info, url, titlePage]);
+    
+  }, [titlePage, url]);
 
   if(error){
     return (
