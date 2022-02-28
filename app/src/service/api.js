@@ -1,18 +1,18 @@
 const urlBase = `https://restcountries.com/v3.1`;
 
 const initGET = () => {
-    const controller = new AbortController();
+  const controller = new AbortController();
 
-    return {
-        method: 'GET',
-        mode: 'cors',
-        caches: 'default',
-        signal: controller.signal
-    }
-}
+  return {
+    method: "GET",
+    mode: "cors",
+    caches: "default",
+    signal: controller.signal,
+  };
+};
 
 const fetchListCountries = (url, setError, setInfo, setIsLoaded) => {
-    fetch(url, initGET)
+  fetch(url, initGET)
     .then((response) => response.json())
     .then(
       (info) => {
@@ -24,45 +24,45 @@ const fetchListCountries = (url, setError, setInfo, setIsLoaded) => {
         setError(error);
       }
     );
-}
+};
 
 const fetchCountryDetails = async (
-    id, setCountryInfo, 
-    setError, setIsLoading
+  id,
+  setCountryInfo,
+  setError,
+  setIsLoading
 ) => {
+  const url = `${urlBase}/name/${id}?fullText=true`;
 
-    const url = `${urlBase}/name/${id}?fullText=true`;
+  await fetch(url, initGET)
+    .then((response) => response.json())
+    .then((info) => setCountryInfo(info),(error) => setError(error));
 
-    await fetch(url, initGET)
-        .then((response) => response.json())
-        .then((info) => setCountryInfo(info),(error) => setError(error));
-
-   setIsLoading(false);
-}
+  setIsLoading(false);
+};
 
 const fetchCountriesBordersName = async (
-    countriesBorderAcronomys, 
-    setCountryBorderNames, 
-    setError
+  countriesBorderAcronomys,
+  setCountryBorderNames,
+  setError
 ) => {
-    
-    if (countriesBorderAcronomys !== undefined) {
-      const url = `${urlBase}/alpha?codes=${
-        countriesBorderAcronomys !== undefined
-          ? countriesBorderAcronomys.join().toLowerCase()
-          : countriesBorderAcronomys
-      }`;
+  if (countriesBorderAcronomys !== undefined) {
+    const url = `${urlBase}/alpha?codes=${
+      countriesBorderAcronomys !== undefined
+        ? countriesBorderAcronomys.join().toLowerCase()
+        : countriesBorderAcronomys
+    }`;
 
     await fetch(url, initGET)
-        .then((response) => response.json())
-        .then((info) => setCountryBorderNames(info), (error) => setError(error));
-    }
+      .then((response) => response.json())
+      .then((info) => setCountryBorderNames(info), (error) => setError(error));
+  }
 };
 
 export {
-    urlBase,
-    initGET,
-    fetchListCountries,
-    fetchCountryDetails,
-    fetchCountriesBordersName
-}
+  urlBase,
+  initGET,
+  fetchListCountries,
+  fetchCountryDetails,
+  fetchCountriesBordersName,
+};

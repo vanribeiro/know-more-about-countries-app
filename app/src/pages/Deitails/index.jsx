@@ -15,6 +15,7 @@ const Details = ({ toggleTheme }) => {
   let { id } = useParams();
 
   useEffect(() => {
+    
     const controller = new AbortController();
 
     let timer = setTimeout(() => {
@@ -25,6 +26,7 @@ const Details = ({ toggleTheme }) => {
       setTimeout(() => controller.abort(), 5000);
       clearTimeout(timer);
     };
+
   }, [id]);
 
   if (error) {
