@@ -46,10 +46,7 @@ const Message = styled.div`
   justify-content: center;
   width: 100%;
   color: ${({theme}) => theme.text};
-
-  @media screen and (min-width: 768px){
-    height: calc(100vh - 130px);
-  }
+  height: calc(100vh - 130px);
 `;
 
 export { H2, Strong, P, Img, Main, Button, Message};

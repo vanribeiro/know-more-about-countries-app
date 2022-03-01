@@ -25,7 +25,6 @@ const Common = ({toggleTheme, url, titlePage}) => {
     
     return () => {
       controller.abort();
-      setTimeout(() => controller.abort(), 5000);
     };
     
   }, [titlePage, url]);

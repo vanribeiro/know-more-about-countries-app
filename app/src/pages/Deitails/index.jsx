@@ -24,7 +24,7 @@ const Details = ({ toggleTheme }) => {
     }, 2000);
 
     return () => {
-      setTimeout(() => controller.abort(), 5000);
+      controller.abort();
       clearTimeout(timer);
     };
 
