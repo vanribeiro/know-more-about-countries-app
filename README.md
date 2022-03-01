@@ -82,7 +82,7 @@ I learned nice things about to use fetch API to get Restful API data and how imp
 
 > Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
 
-And I never understood why this was happening. After sometime looking for a solution, I discovery this was happen because I was using some props inside `useEffect` and just to pass it inside brackets dependencies wasn't sufficient. I needed to clean up it correctly. [This post](https://academind.com/tutorials/useeffect-abort-http-requests) was really usefull to me on that moment.
+And I never understood why this was happening. After sometime looking for a solution, I discovery this was happen because I was using some props inside `useEffect` and just to pass it inside brackets dependencies wasn't sufficient. I needed to clean up it correctly. [This post](https://academind.com/tutorials/useeffect-abort-http-requests) was really useful to me on that moment.
 
 The problem was happing because when I was going to home page, the Details Page was on unmount life cycle. The solution recommended by the post author was use a clean up function using the `signal` property of `Abort Controller` to know when to cancel the Http request and this stopped the error.
 
@@ -118,6 +118,7 @@ After write some tests, I wanto to convert this project from `Create React App` 
 
 - [Making Http Requests with React useEffect - Correctly](https://academind.com/tutorials/useeffect-abort-http-requests) - This is an amazing article which helped me finally understand and helped me to write HTTP Request in a nice way, without memory leaks and using Hooks. I really liked this pattern and will use it going forward.
 - [O que significa %20 e %30 em URL?](https://pt.quora.com/O-que-significa-20-e-30-em-URL) -  Up to this challenge, I didn't know anything about `HTML URL Encoding`. Searching on Google, I discovery this Question/Answer wich was really useful to understand which chracacteres should be use to compose an URL. I'd recommend who uses SPA to learn a little about it.
+- [Comunicação entre componentes no React](https://medium.com/luizalabs/comunica%C3%A7%C3%A3o-entre-componentes-no-react-6b42aac62321) -  This post was really useful to me about to understand how to send props from `child` to `parent` component, without using Context API. The Context API It's a really nice thing, but I didn't like it to use to pass value from input using `change` listener. I thought the typing really slow.
 
 ## Author
 
