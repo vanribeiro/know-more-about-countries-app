@@ -10,7 +10,8 @@ const lightMode = {
     cardContentBackgroundColor: 'hsl(0, 0%, 100%)',
     inputBackgroundColor: 'hsl(0, 0%, 100%)',
     inputBoxShadowColor: 'hsl(0, 0%, 91.4%)',
-    errorMessageColor: 'red'
+    errorMessageColor: 'red',
+    linkText: '#00aad4'
 }
 
 const darkMode = {
@@ -25,7 +26,8 @@ const darkMode = {
     cardContentBackgroundColor: 'hsl(209, 23%, 22%)',
     inputBackgroundColor: 'hsl(209, 23%, 22%)',
     inputBoxShadowColor: 'transparent',
-    errorMessageColor: '#ce4444'
+    errorMessageColor: '#ce4444',
+    linkText: '#00aad4'
 }
 
 export {

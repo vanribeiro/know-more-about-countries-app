@@ -2,6 +2,10 @@ import styled from "styled-components";
 
 const Main = styled.main`
   width: 100%;
+
+  @media screen and (min-width: 768px){
+    height: calc(100vh - 180px);
+  }
 `;
 
 const H2 = styled.h2`
@@ -41,8 +45,11 @@ const Message = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: calc(100vh - 80px);
   color: ${({theme}) => theme.text};
+
+  @media screen and (min-width: 768px){
+    height: calc(100vh - 130px);
+  }
 `;
 
 export { H2, Strong, P, Img, Main, Button, Message};

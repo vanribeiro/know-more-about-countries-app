@@ -7,6 +7,7 @@ import CountryDetails from "../../components/CountryDetails";
 import BackButton from "./../../components/BackButton";
 import { Loader, Error } from "./../../components/MessageStatus";
 import { useParams } from "react-router-dom";
+import Footer from "../../components/Footer";
 
 const Details = ({ toggleTheme }) => {
   const [countryInfo, setCountryInfo] = useState([]);
@@ -38,6 +39,7 @@ const Details = ({ toggleTheme }) => {
             <Error error={error} />
           </Container>
         </Main>
+        <Footer />
       </>
     );
   } else if (isLoading) {
@@ -49,6 +51,7 @@ const Details = ({ toggleTheme }) => {
             <Loader />
           </Container>
         </Main>
+        <Footer />
       </>
     );
   } else {
@@ -63,6 +66,7 @@ const Details = ({ toggleTheme }) => {
             </>
           </Container>
         </Main>
+        <Footer />
       </>
     );
   }

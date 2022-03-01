@@ -12,7 +12,8 @@ const lightModeTheme = {
     cardContentBackgroundColor: lightMode.cardContentBackgroundColor,
     inputBackgroundColor: lightMode.inputBackgroundColor,
     inputBoxShadowColor: lightMode.inputBoxShadowColor,
-    errorMessageColor: lightMode.errorMessageColor
+    errorMessageColor: lightMode.errorMessageColor,
+    linkText: lightMode.linkText
 }
 
 const darkModeTheme = {
@@ -27,7 +28,8 @@ const darkModeTheme = {
     cardContentBackgroundColor: darkMode.cardContentBackgroundColor,
     inputBackgroundColor: darkMode.inputBackgroundColor,
     inputBoxShadowColor: darkMode.inputBoxShadowColor,
-    errorMessageColor: darkMode.errorMessageColor
+    errorMessageColor: darkMode.errorMessageColor,
+    linkText: darkMode.linkText
 }
 
 export {

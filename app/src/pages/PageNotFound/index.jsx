@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import BackButton from '../../components/BackButton';
 import Container from '../../components/Container';
+import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import { Message, H2, Main } from "../../components/UI";
 
@@ -30,6 +31,7 @@ const PageNotFound = ({toggleTheme}) =>{
 
           </Container>
         </Main>
+        <Footer />
         </>
     )
 }

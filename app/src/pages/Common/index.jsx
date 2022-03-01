@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Error, Loader } from "../../components/MessageStatus";
 import CardList from "../../components/CardList";
 import { fetchListCountries } from "../../service/api";
+import Footer from "../../components/Footer";
 
 const Main = styled.main`
   width: 100%;
@@ -38,6 +39,7 @@ const Common = ({toggleTheme, url, titlePage}) => {
             <Error error={error} />
           </Container>
         </Main>
+        <Footer />
       </>
     );
   } else if(!isLoaded){
@@ -49,6 +51,7 @@ const Common = ({toggleTheme, url, titlePage}) => {
             <Loader />
           </Container>
         </Main>
+        <Footer />
       </>
     );
   } else{
@@ -60,6 +63,7 @@ const Common = ({toggleTheme, url, titlePage}) => {
               <CardList cardsInfo={info}/>
           </Container>
         </Main>
+        <Footer />
       </>
     );
   }
