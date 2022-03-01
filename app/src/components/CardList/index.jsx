@@ -37,9 +37,9 @@ const CardList = ({ cardsInfo }) => {
               <Link
                 key={id}
                 to={`/country/${info.name.common
-                  .replaceAll(/\s/ig, "%20")
-                  .replaceAll(/\(/ig, "%28")
-                  .replaceAll(/\)/ig, "%29")
+                  .replace(/\s/ig, "%20")
+                  .replace(/\(/ig, "%28")
+                  .replace(/\)/ig, "%29")
                   .toLowerCase()}`}
               >
                 <CountryCard info={info} />

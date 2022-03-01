@@ -59,7 +59,7 @@ const Common = ({toggleTheme, url, titlePage}) => {
         <Header toggleTheme={toggleTheme}/>
         <Main>
           <Container>
-              <CardList cardsInfo={info}/>
+              <CardList className="card-list" cardsInfo={info}/>
           </Container>
         </Main>
         <Footer />
