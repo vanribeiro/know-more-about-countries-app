@@ -21,6 +21,10 @@ const TopButton = styled(Button)`
   .arrow-left-icon{
     fill: ${({theme}) => theme.text};
   }
+
+  &:hover{
+    box-shadow: 4px 4px 10px ${({theme}) => theme.boxShadowHover};
+  }
 `;
 
 export {

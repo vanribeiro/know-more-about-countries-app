@@ -1,6 +1,7 @@
 import { lightMode, darkMode } from './variables';
 
 const lightModeTheme = {
+    boxShadowHover: lightMode.boxShadowHover,
     headerBackground: lightMode.headerBackground,
     boxShadowColor: lightMode.boxShadowColor,
     backgroundColor: lightMode.backgroundColor,
@@ -17,6 +18,7 @@ const lightModeTheme = {
 }
 
 const darkModeTheme = {
+    boxShadowHover: darkMode.boxShadowHover,
     headerBackground: darkMode.headerBackground,
     boxShadowColor: darkMode.boxShadowColor,
     backgroundColor: darkMode.backgroundColor,

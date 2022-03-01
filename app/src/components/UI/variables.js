@@ -1,4 +1,5 @@
 const lightMode = {
+    boxShadowHover: 'rgb(190, 190, 190)',
     headerBackground: 'hsl(0, 0%, 100%)',
     backgroundColor: 'hsl(0, 0%, 98%)',
     elements: 'hsl(0, 0%, 100%)',
@@ -15,6 +16,7 @@ const lightMode = {
 }
 
 const darkMode = {
+    boxShadowHover: 'hsl(208.9, 49.1%, 10.8%)',
     headerBackground: 'hsl(209, 23%, 22%)',
     backgroundColor: 'hsl(207, 26%, 17%)',
     elements: 'hsl(207, 26%, 17%)',

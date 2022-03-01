@@ -7,6 +7,12 @@ const CardContainer = styled(Card)`
     max-width: 100%;
     box-shadow: 1px 1px 5px ${({theme}) => theme.boxShadowColor};
     background-color: ${({theme}) => theme.cardBackgroundColor};
+
+    &:hover{
+        transform: translate(-3px, -3px);
+        transition: ease-in-out 0.2s transform;
+        box-shadow: 4px 4px 10px ${({theme}) => theme.boxShadowHover};
+    }
 `;
 
 const CardImage = styled(CardMedia)`

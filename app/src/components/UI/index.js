@@ -38,6 +38,12 @@ const Button = styled.button`
     border-radius: 4px;
     cursor: pointer;
     text-transform: initial;
+
+    &:hover{
+      transform: translate(-3px, -3px);
+      transition: ease-in-out 0.2s transform;
+      box-shadow: 2px 2px 5px ${({theme}) => theme.boxShadowHover};
+  }
 `;
 
 const Message = styled.div`
